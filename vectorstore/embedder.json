@@ -1,0 +1,4 @@
+{
+  "name": "sentence_transformers_minilm",
+  "model": "sentence-transformers/all-MiniLM-L6-v2"
+}

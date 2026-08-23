@@ -1,0 +1,12 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.streamlit/secrets.toml
+.DS_Store
+
+# NOTE: vectorstore/ (index.faiss + metadata.pkl) is intentionally NOT
+# ignored - it ships as part of the deployment so Streamlit Cloud doesn't
+# need to rebuild embeddings on startup. Re-run `python scripts/build_index.py`
+# and commit the updated files whenever the knowledge_base PDFs change.
