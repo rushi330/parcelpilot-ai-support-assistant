@@ -19,6 +19,18 @@ The assistant brings these sources together and answers customer questions using
 
 When information is insufficient, access is restricted, or an action requires human confirmation, the system handles the situation without guessing.
 
+# ParcelPilot Customer Support Assistant
+
+An AI-powered customer support assistant for ParcelPilot, a B2B logistics platform.
+
+## 🚀 Live Demo
+
+**[Try the ParcelPilot Customer Support Assistant]
+(https://parcelpilot-ai-support-assistant-aakzwubjetfacmrektwq93.streamlit.app/)**
+
+Hosted on Streamlit Community Cloud.
+
+
 ## Architecture
 
 ```text
@@ -58,7 +70,7 @@ Detection             |
                  Final Response
 
 
-**##When Does the LLM Get Called?**
+## When Does the LLM Get Called?
 
 The LLM is mainly used for natural-language response generation.
 
