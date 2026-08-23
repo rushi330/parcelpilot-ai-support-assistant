@@ -21,6 +21,7 @@ When information is insufficient, access is restricted, or an action requires hu
 
 ## Architecture
 
+```text
 User
   |
   v
@@ -29,34 +30,33 @@ Streamlit Chat Interface
   v
 Deterministic Orchestrator
   |
-  +--------------------------+
-  |                          |
-  v                          v
-Intent / Entity          Evidence Assembly
-Detection                    |
-                             +--> Account / Order / Ticket Data
-                             |
-                             +--> Semantic Document Retrieval
-                             |
-                             +--> Access Control
-                             |
-                             +--> Business Calculations
-                             |
-                             v
-                      Verified Evidence
-                             |
-                    +--------+--------+
-                    |                 |
-                    v                 v
-              Deterministic      One LLM Call
-                Response          if needed
-                    |                 |
-                    +--------+--------+
-                             |
-                             v
-                       Final Response
+  +----------------------+
+  |                      |
+  v                      v
+Intent / Entity       Evidence Assembly
+Detection             |
+                       +--> Account / Order / Ticket Data
+                       |
+                       +--> Semantic Document Retrieval
+                       |
+                       +--> Access Control
+                       |
+                       +--> Business Calculations
+                       |
+                       v
+                Verified Evidence
+                       |
+             +---------+---------+
+             |                   |
+             v                   v
+       Deterministic        One LLM Call
+        Response             (if needed)
+             |                   |
+             +---------+---------+
+                       |
+                       v
+                 Final Response
 
-The LLM is not responsible for the overall orchestration. The application first determines what information is required, retrieves it, validates access, and builds the evidence package.
 
 **##When Does the LLM Get Called?**
 
