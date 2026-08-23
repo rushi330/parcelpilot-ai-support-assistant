@@ -68,6 +68,7 @@ Detection             |
                        |
                        v
                  Final Response
+```
 
 
 ## When Does the LLM Get Called?
