@@ -59,7 +59,7 @@ Detection                    |
 
 The LLM is not responsible for the overall orchestration. The application first determines what information is required, retrieves it, validates access, and builds the evidence package.
 
-##When Does the LLM Get Called?
+**##When Does the LLM Get Called?**
 
 The LLM is mainly used for natural-language response generation.
 
