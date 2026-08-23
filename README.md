@@ -20,6 +20,7 @@ The assistant brings these sources together and answers customer questions using
 When information is insufficient, access is restricted, or an action requires human confirmation, the system handles the situation without guessing.
 
 ## Architecture
+
 User
   |
   v
