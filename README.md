@@ -292,6 +292,16 @@ The application will be available at:
 
 http://localhost:8501
 
+# ParcelPilot Customer Support Assistant
+
+An AI-powered customer support assistant for ParcelPilot, a B2B logistics platform.
+
+## 🚀 Live Demo
+
+**[Try the ParcelPilot Customer Support Assistant](https://parcelpilot-ai-support-assistant-aakzwubjetfacmrektwq93.streamlit.app/)**
+
+Hosted on Streamlit Community Cloud.
+
 **#Author:**
 Rushikesh Desale
 Artificial Intelligence and Data Science Graduate'26 | 
