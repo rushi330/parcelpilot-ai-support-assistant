@@ -239,6 +239,7 @@ Pandas, Excel workbookPDF, knowledge base
 Testing :Pytest
 
 **#Project Structure:**
+```
 parcelpilot/
 │
 ├── app.py
@@ -269,6 +270,7 @@ parcelpilot/
     ├── index.faiss
     ├── metadata.pkl
     └── embedder.json
+```
 
 ## Run Locally
 
