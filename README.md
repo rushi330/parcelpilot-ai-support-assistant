@@ -25,8 +25,7 @@ An AI-powered customer support assistant for ParcelPilot, a B2B logistics platfo
 
 ## 🚀 Live Demo
 
-**[Try the ParcelPilot Customer Support Assistant]
-(https://parcelpilot-ai-support-assistant-aakzwubjetfacmrektwq93.streamlit.app/)**
+**[Try the ParcelPilot Customer Support Assistant](https://parcelpilot-ai-support-assistant-aakzwubjetfacmrektwq93.streamlit.app/)**
 
 Hosted on Streamlit Community Cloud.
 
@@ -306,15 +305,79 @@ The application will be available at:
 
 http://localhost:8501
 
-# ParcelPilot Customer Support Assistant
 
-An AI-powered customer support assistant for ParcelPilot, a B2B logistics platform.
+## Architecture Note
 
-## 🚀 Live Demo
+### Agent Design
 
-**[Try the ParcelPilot Customer Support Assistant](https://parcelpilot-ai-support-assistant-aakzwubjetfacmrektwq93.streamlit.app/)**
+The system uses a deterministic orchestration layer rather than allowing the LLM to control the complete workflow. Intent and entity detection, access control, evidence retrieval, business calculations, and escalation handling are performed through application logic.
 
-Hosted on Streamlit Community Cloud.
+The LLM is used mainly for natural-language response generation after the required evidence has been assembled and verified.
+
+### Tool Design
+
+The system is organized around three capability categories:
+
+- Document retrieval for policies, SOPs, agreements, and product documentation
+- Structured-data lookup and calculations for accounts, orders, and tickets
+- State-changing actions such as creating support escalations
+
+State-changing actions require explicit user confirmation before execution.
+
+### Document and Structured-Data Handling
+
+Documents are chunked and embedded using Sentence Transformers and indexed with FAISS for semantic retrieval.
+
+Structured account, order, and ticket information is handled separately through application-level data tools. Evidence from both sources is combined before generating a response.
+
+### Source Reliability and Conflict Handling
+
+Sources are not treated as equally authoritative. Current policies and SOPs are prioritized, while customer-specific agreements can override general policies where applicable.
+
+Deprecated documents are excluded from active retrieval, and historical ticket resolutions are treated as supporting context rather than authoritative instructions.
+
+### Major Technical Trade-offs
+
+The main trade-off was choosing deterministic orchestration instead of using the LLM for every decision.
+
+This adds more application-side logic, but provides better control over access, business rules, state-changing actions, and unnecessary LLM calls. It also makes the system easier to test and reason about.
+
+## Product Note
+
+### Additional Client Problem
+
+I chose to focus on **Trust and Reliability**.
+
+The system addresses this by separating retrieval from decision-making, applying source authority rules, enforcing account-level access control, and using the LLM only after verified evidence has been assembled.
+
+### What I Would Build Next
+
+For a fuller ParcelPilot product, I would add an internal operations dashboard showing recurring support issues, SLA risks, high-severity tickets, and patterns across customers.
+
+I would also add production authentication, monitoring, feedback collection, and stronger evaluation of answer accuracy.
+
+### What I Intentionally Left Out
+
+To keep the submission focused, I did not build a full production authentication system, large-scale monitoring infrastructure, or a complete internal operations dashboard.
+
+Authentication is mocked through the customer selector so the core access-control workflow can be demonstrated.
+
+### Product Metric
+
+The primary metric I would track is **verified resolution rate** — the percentage of customer queries that are resolved correctly from available evidence without requiring human intervention.
+
+## AI Tool Usage
+
+I used ChatGPT and Claude during development as coding and development assistants.
+
+They were mainly used for:
+- Debugging and troubleshooting implementation issues
+- Reviewing and improving code structure
+- Exploring implementation approaches
+- Understanding and resolving dependency and deployment issues
+- Refining documentation and README content
+
+The final architecture, retrieval pipeline, access-control logic, orchestration approach, business rules, and product decisions were reviewed and adapted based on the ParcelPilot requirements and the behavior of the implemented system.
 
 **#Author:**
 Rushikesh Desale
