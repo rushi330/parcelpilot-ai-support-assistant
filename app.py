@@ -53,12 +53,12 @@ with st.sidebar:
             st.caption(f"{e['escalation_id']} - {e['priority']} - {e['status']}")
 
 # ---------- Reset chat state when switching accounts ----------
-if st.session_state.get("active_account_id") != selected_account_id:
-    st.session_state["active_account_id"] = selected_account_id
+if st.button("🔄 Reset conversation"):
     st.session_state["messages"] = []
     st.session_state["conv_state"] = new_session_state()
+    st.rerun()
 
-conv_state = st.session_state["conv_state"]
+conv_state = st.session_state.get("conv_state", new_session_state())
 
 st.title("ParcelPilot Customer Support")
 st.caption(f"Chatting as **{selected_account_name}** ({selected_account_id})")
@@ -106,17 +106,18 @@ if user_input:
                 st.session_state["conv_state"] = result["session_state"]
                 answer = result["answer"]
             except Exception as e:
-                import traceback
-                st.error(f"❌ {type(e).__name__}: {e}")
-                with st.expander("🔴 Full traceback"):
-                    st.code(traceback.format_exc())
+                answer = (
+                    "Sorry, something went wrong while processing your request. "
+                    "Please try again. If the issue continues, please contact "
+                    "ParcelPilot support."
+                    )
 
-                answer = f"Debug error: {type(e).__name__}: {e}"
                 result = {
                     "steps": [],
                     "sources": [],
                     "used_llm": False,
                 }
+                print(f"[ERROR] {type(e).__name__}: {e}")
                     
 
         st.markdown(answer)
